@@ -1,3 +1,27 @@
+var density = {
+    "US-SD": 2, 
+    "CA-ON": 600, 
+    "US-PA": 5, 
+    "US-MI": 1
+};
+var max = 600;
+
+/*$.getJSON("http://192.168.0.113:8000/space/list", function(data){
+    density = JSON.parse(data);
+})*/
+
+var pick_colour = function(num){
+    if(num < max/4){
+        return '#0xEDF8FB';
+    } else if(num < max/2){
+        return '#0xB2E2E2';
+    } else if(num < 3*max/4){
+        return '#0x66C2A4';
+    } else {
+        return '#0x238B45';
+    }
+}
+
 var mapping = { 
     map: Kartograph.map("#map", $(window).width() * 0.75, $(window).width() * (0.33)),
     mapURL: "../svg/world.svg",
@@ -7,14 +31,22 @@ var mapping = {
             mapping.map.addLayer("provinces", {
 
 		        styles: {
-		            fill: '#ee9900'
+		            fill: '#FFFFFF'
 		        },
 
 		        title: function(d) {
-		            return "MERICA";
-		        }
+		            return d.id;
+		        },
+
+                key: function(d) {
+                    return d.id;
+                },
             });
             callback(mapping.map);
+
+            $.each(Object.keys(density), function(index, value){
+                $('a[key="' + value + '"]').children()[0].attr('fill', pick_colour(density.value));
+            });
         });
     },
 
