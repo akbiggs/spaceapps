@@ -9,13 +9,16 @@ var map = {
     },
 
     showMap: function(pos) {
+
         //this.loadMap();
         $("#map").html("<p>Map of surrounding results for " 
                 + map.locString(pos) + " goes here.</p>");
+
     },
 
     locString: function(pos) {
         return "(" + pos.lat + ", " + pos.long + ")"
+<<<<<<< Updated upstream
     },
 
     getLocation: function(callback) {
@@ -51,3 +54,4 @@ var map = {
         }
     },
 };
+
