@@ -1,11 +1,11 @@
-var map = {
+var mapping = {
     map: $K.map("#map", 800, 400),
-    mapURL: "../svg/world_onelayer.svg",
+    mapURL: "../svg/usa.svg",
 
     loadMap: function() {
-        this.map.loadMap(this.mapURL, function() {
+        mapping.map.loadMap(mapping.mapURL, function() {
             // do something
-             map.addLayer('countries', {
+             mapping.map.addLayer('countries', {
 		        styles: {
 		            fill: '#ee9900'
 		        },
@@ -17,11 +17,9 @@ var map = {
     },
 
     showMap: function(pos) {
-
-        map.loadMap();
+        mapping.loadMap();
         $("#map").html("<p>Map of surrounding results for " 
-                + map.locString(pos) + " goes here.</p>");
-
+                + mapping.locString(pos) + " goes here.</p>");
     },
 
     locString: function(pos) {

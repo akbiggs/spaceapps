@@ -1,12 +1,12 @@
 var handlers = {
     sawIt: function() {
         this.hideUI();
-        map.getLocation(map.showMap);
+        mapping.getLocation(mapping.showMap);
     },
 
     missedIt: function() {
         this.hideUI();
-        map.getLocation(map.showMap);
+        mapping.getLocation(mapping.showMap);
     },
 
     hideUI: function() {
