@@ -1,16 +1,24 @@
 var map = {
     map: $K.map("#map", 800, 400),
-    mapURL: "",
+    mapURL: "../svg/world_onelayer.svg",
 
     loadMap: function() {
-        this.map.loadMap(this.mapURL, function(myMap) {
+        this.map.loadMap(this.mapURL, function() {
             // do something
+             map.addLayer('countries', {
+		        styles: {
+		            fill: '#ee9900'
+		        },
+		        title: function(d) {
+		            return d.countryName;
+		        }
+		    });
         });
     },
 
     showMap: function(pos) {
 
-        //this.loadMap();
+        map.loadMap();
         $("#map").html("<p>Map of surrounding results for " 
                 + map.locString(pos) + " goes here.</p>");
 
