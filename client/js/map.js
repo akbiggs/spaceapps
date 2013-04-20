@@ -1,25 +1,28 @@
 var mapping = {
-    map: $K.map("#map", 800, 400),
+    map: Kartograph.map("#mymap"),
     mapURL: "../svg/usa.svg",
 
     loadMap: function() {
         mapping.map.loadMap(mapping.mapURL, function() {
             // do something
-             mapping.map.addLayer('countries', {
+            console.log(mapping.map);
+            mapping.map.addLayer("usa");
+            /*mapping.map.addLayer({
+                id: "countries",
+
 		        styles: {
 		            fill: '#ee9900'
 		        },
+
 		        title: function(d) {
 		            return d.countryName;
 		        }
-		    });
+            });*/
         });
     },
 
     showMap: function(pos) {
         mapping.loadMap();
-        $("#map").html("<p>Map of surrounding results for " 
-                + mapping.locString(pos) + " goes here.</p>");
     },
 
     locString: function(pos) {
