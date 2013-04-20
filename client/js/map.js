@@ -20,9 +20,8 @@ var mapping = {
 
     showMap: function(pos) {
         mapping.loadMap(function(map) {
-            $("#results").popup("open", {
-                "transition": "pop",
-            });
+            $.mobile.changePage("#results");
+            $(".ui-page").css("background-image", "none");
         });
     },
 
