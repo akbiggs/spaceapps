@@ -1,6 +1,15 @@
 <!doctype html>
 <html>
     <head>
+        <!-- FONTS -->
+        <link href='http://fonts.googleapis.com/css?family=Noto+Sans'
+        rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Noto+Serif'
+        rel='stylesheet' type='text/css'>
+        <link
+        href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300'
+        rel='stylesheet' type='text/css'>
+
         <!-- JQUERY MOBILE -->
         <link rel="stylesheet"
         href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css"
@@ -11,7 +20,7 @@
         
         <!-- KARTOGRAPH -->
         <script
-            src="https://raw.github.com/kartograph/kartograph.js/master/kartograph.min.js"></script>
+            src="https://raw.github.com/kartograph/kartograph.js/master/kartograph.js"></script>
 
         <!-- CUSTOM IMPORTS -->
         <link rel="stylesheet" href="css/custom.css" />
@@ -21,12 +30,14 @@
     </head>
     <body>
         <center>
-            <h1>Did You See The Satellite?</h1>
-            <button id="saw" onClick="handlers.sawIt()" data-role="button" data-theme="a" data-inline="true">I saw it</button>
-            <button id="missed" onClick="handlers.missedIt()" data-role="button" data-theme="b" data-inline="true">I missed
-                it</button>
-            <div id="location-form"></div>
-            <div id="map"></div>
+            <h1 class="header">Did You See The Satellite?</h1>
+            <div class="content" data-role="content">
+                <button id="saw" onClick="handlers.sawIt()" data-role="button" data-theme="a" data-inline="true">I saw it</button>
+                <button id="missed" onClick="handlers.missedIt()" data-role="button" data-theme="b" data-inline="true">I missed
+                    it</button>
+                <div id="location-form"></div>
+                <div id="map"></div>
+            </div>
         </center>
     </body>
 </html>

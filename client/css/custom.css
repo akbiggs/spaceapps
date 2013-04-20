@@ -1,0 +1,17 @@
+.ui-page {
+    background: #000;
+    background-image: url(../res/space.jpg);
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-position: center;
+}
+
+.header {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 36px;
+    color: #fff;
+}
+
+.content p {
+    color: #fff;
+}
