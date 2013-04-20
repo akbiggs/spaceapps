@@ -1,4 +1,4 @@
-var mapping = {
+var mapping = { 
     map: Kartograph.map("#map", $(window).width() * 0.75, $(window).width() * (0.33)),
     mapURL: "../svg/usa.svg",
 
@@ -19,11 +19,7 @@ var mapping = {
     },
 
     showMap: function(pos) {
-        mapping.loadMap(function(map) {
-            $("#results").popup("open", {
-                "transition": "pop",
-            });
-        });
+        mapping.loadMap();
     },
 
     locString: function(pos) {

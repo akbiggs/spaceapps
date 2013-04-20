@@ -8,6 +8,16 @@
         href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300'
         rel='stylesheet' type='text/css'>
 
+        <!-- JQUERY MOBILE -->
+        <link rel="stylesheet"
+        href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css"
+        />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script
+            src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.js"></script>
+        <!-- CUSTOM CSS -->
+        <link rel="stylesheet" href="css/custom.css" />
+
                 <title>Saw The Satellite</title>
     </head>
     <body>
@@ -25,40 +35,11 @@
             </div>
             <a id="showResults" href="#results" data-rel="" data-transition="pop" style="display:none;"></a>
 
-            <!-- RESULTS DIALOG -->
-            <div data-role="popup" data-theme="a" data-overlay-theme="a"
-                data-dismissable="false" data-position-to="window" id="results">
-                <div id="map">
-                </div>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-                <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                Blah Blah Blah Blah Blah Blah Blah Blah</p>
-            </div>
-        </div>
-
-        
+            
+            <div id="map"></div>
+      
 
     </body>
-    <!-- JQUERY MOBILE -->
-    <link rel="stylesheet"
-    href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css"
-    />
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script
-        src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.js"></script>
 
     <!-- RAPHAEL -->
     <script src="https://raw.github.com/DmitryBaranovskiy/raphael/master/raphael.js"></script> 
@@ -68,7 +49,6 @@
         src="http://kartograph.org/js/kartograph.js"></script>
 
     <!-- CUSTOM IMPORTS -->
-    <link rel="stylesheet" href="css/custom.css" />
     <script src="js/map.js"></script>
     <script src="js/handlers.js"></script>
 </html>
