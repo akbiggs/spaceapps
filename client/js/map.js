@@ -21,7 +21,6 @@ var mapping = {
     showMap: function(pos) {
         mapping.loadMap(function(map) {
             $("#results").popup("open", {
-                "positionTo": "window",
                 "transition": "pop",
             });
         });
