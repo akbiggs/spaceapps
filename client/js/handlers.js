@@ -10,6 +10,7 @@ var handlers = {
     },
 
     hideUI: function() {
+        $(".header").fadeOut("slow", 0);
         $(".content-before-map").fadeOut("slow", 0);
     }
 };
