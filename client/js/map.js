@@ -26,6 +26,7 @@ var map = {
 
     locString: function(pos) {
         return "(" + pos.lat + ", " + pos.long + ")"
+
     },
 
     getLocation: function(callback) {
@@ -61,4 +62,5 @@ var map = {
         }
     },
 };
+
 
