@@ -19,7 +19,14 @@ var mapping = {
     },
 
     showMap: function(pos) {
+<<<<<<< HEAD
         mapping.loadMap();
+=======
+        mapping.loadMap(function(map) {
+            $.mobile.changePage("#results");
+            $(".ui-page").css("background-image", "none");
+        });
+>>>>>>> 6bd9fa0f5c2c86fc828fec560030b7b8b3300695
     },
 
     locString: function(pos) {
