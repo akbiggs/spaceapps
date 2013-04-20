@@ -1,28 +1,30 @@
 var mapping = {
-    map: Kartograph.map("#mymap"),
+    map: Kartograph.map("#map", $(window).width() * 0.75, $(window).width() * (0.33)),
     mapURL: "../svg/usa.svg",
 
-    loadMap: function() {
+    loadMap: function(callback) {
         mapping.map.loadMap(mapping.mapURL, function() {
-            // do something
-            console.log(mapping.map);
-            mapping.map.addLayer("usa");
-            /*mapping.map.addLayer({
-                id: "countries",
+            mapping.map.addLayer("usa", {
 
 		        styles: {
 		            fill: '#ee9900'
 		        },
 
 		        title: function(d) {
-		            return d.countryName;
+		            return "MERICA";
 		        }
-            });*/
+            });
+            callback(mapping.map);
         });
     },
 
     showMap: function(pos) {
-        mapping.loadMap();
+        mapping.loadMap(function(map) {
+            $("#results").popup("open", {
+                "positionTo": "window",
+                "transition": "pop",
+            });
+        });
     },
 
     locString: function(pos) {
@@ -30,7 +32,7 @@ var mapping = {
 
     },
 
-    getLocation: function(callback) {
+    getLocation: function(callback, yesVote) {
         if (navigator.geolocation) {
             $("#location-form").html("<p>Finding location...</p>");
 
@@ -63,5 +65,3 @@ var mapping = {
         }
     },
 };
-
-
