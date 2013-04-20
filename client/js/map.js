@@ -1,10 +1,10 @@
 var mapping = { 
     map: Kartograph.map("#map", $(window).width() * 0.75, $(window).width() * (0.33)),
-    mapURL: "../svg/usa.svg",
+    mapURL: "../svg/world.svg",
 
     loadMap: function(callback) {
         mapping.map.loadMap(mapping.mapURL, function() {
-            mapping.map.addLayer("usa", {
+            mapping.map.addLayer("provinces", {
 
 		        styles: {
 		            fill: '#ee9900'
@@ -19,14 +19,11 @@ var mapping = {
     },
 
     showMap: function(pos) {
-<<<<<<< HEAD
-        mapping.loadMap();
-=======
+
         mapping.loadMap(function(map) {
             $.mobile.changePage("#results");
             $(".ui-page").css("background-image", "none");
         });
->>>>>>> 6bd9fa0f5c2c86fc828fec560030b7b8b3300695
     },
 
     locString: function(pos) {
