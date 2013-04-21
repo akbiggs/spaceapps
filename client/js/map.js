@@ -112,6 +112,15 @@ var mapping = {
                     return d.id;
                 },
 
+                tooltips: function(d) {
+                    if(densities[d.id] != undefined){
+                        return [densities[d.id].name, 'sightings: ' + densities[d.id].sightings];
+                    }else{
+                        return ["",""];
+                    }
+                    
+                },  
+
                 done: function() {
                     concludeTimeWasting();
                     $("a").each(function() {
