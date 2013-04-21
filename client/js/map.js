@@ -5,7 +5,7 @@ var max,
 
 
 $.get("http://192.168.0.113:8000/space/max", function(data){
-    max = parseInt(data);
+    max = parseFloat(data);
     }, "text");
 
 
@@ -34,7 +34,7 @@ var initPanZoom = function(){
             $('body').append(css);
 
             // init pan zoom controls
-            var ctrls = $('<div />'), up = $('<div>+</div>'), down = $('<div>−</div>');
+            var ctrls = $('<div />'), up = $('<div>+</div>'), down = $('<div>-</div>');
             ctrls
                 .addClass('map-controls')
                 .css({ position: 'absolute', top: 20, left: 20, 'z-index': 1000 })
