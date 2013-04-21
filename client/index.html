@@ -15,8 +15,11 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script
             src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.js"></script>
-        <!-- CUSTOM CSS -->
+        <!-- CSS -->
         <link rel="stylesheet" href="css/custom.css" />
+        <link rel="stylesheet"
+        href="https://raw.github.com/kartograph/kartograph.org/master/showcase/panzoom/panzoom.css">
+        </link>
 
                 <title>Saw The Satellite</title>
     </head>
@@ -26,7 +29,7 @@
             <p class="header">Did You See The Satellite?</h1>
             <div data-role="content">
                 <div class="content-before-map">
-                    <button id="saw" onClick="handlers.sawIt()" data-role="button" data-theme="a" data-inline="true">I saw it</button>
+                    <button id="saw" onClick="handlers.sawIt()" data-role="button" data-theme="a" data-inline="true">I saw it!</button>
                     <button id="missed" onClick="handlers.missedIt()" data-role="button" data-theme="b" data-inline="true">I missed
                         it</button>
                 </div>
@@ -42,11 +45,10 @@
         </div>
     </body>
 
-    <!--CHROMA 
-    <script src="https://raw.github.com/gka/chroma.js/master/chroma.min.js"> </script> -->
-
     <!-- RAPHAEL -->
     <script src="https://raw.github.com/DmitryBaranovskiy/raphael/master/raphael.js"></script> 
+    <script src="https://raw.github.com/kartograph/kartograph.org/master/showcase/panzoom/raphael.pan-zoom.min.js">
+    </script>
 
     <!-- KARTOGRAPH -->
     <script

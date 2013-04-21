@@ -1,10 +1,16 @@
-/*$.getJSON("http://192.168.0.113:8000/space/list", function(data){
-    density = JSON.parse(data);
-})*/
+var max,
+    density;
 
-var pick_colour = function(num, max) {
-    if (num === undefined || num < max/4) {
-        return '#EDF8FB';
+$.get("http://192.168.0.113:8000/space/max", function(data){
+    max = parseInt(data);
+    }, "text");
+
+
+var pick_colour = function(num){
+    if (num === undefined){
+        return '#FFFFFF';
+    } else if( num < max/4) {
+        return '#EDF9FC';
     } else if(num < max/2){
         return '#B2E2E2';
     } else if(num < 3*max/4){
@@ -15,7 +21,7 @@ var pick_colour = function(num, max) {
 }
 
 var mapping = { 
-    map: Kartograph.map("#map", $(window).width() * 0.75, $(window).width() * (0.33)),
+    map: Kartograph.map("#map" ,$(window).width()),
     mapURL: "../svg/world.svg",
 
     loadMap: function(densities, callback) {
@@ -25,6 +31,8 @@ var mapping = {
 		        styles: {
 		            fill: '#FFFFFF'
 		        },
+
+                chunks: 25,
 
 		        title: function(d) {
 		            return d.id;
@@ -43,12 +51,7 @@ var mapping = {
                     child.setAttribute("fill", pick_colour(densities[title]));
                 });
             });
-            
-            /*
-            $.each(Object.keys(density), function(index, value) {
-                
-                $('a[key="' + value + '"]').children()[0].attr('fill', pick_colour(density.value));
-            });*/
+    
         });
     },
 
