@@ -1,5 +1,4 @@
-var max,
-    density;
+var max, density;
 
 $.get("http://192.168.0.113:8000/space/max", function(data){
     max = parseInt(data);
@@ -26,7 +25,7 @@ var mapping = {
 
     loadMap: function(densities, callback) {
         mapping.map.loadMap(mapping.mapURL, function() {
-            mapping.map.addLayer("provinces", {
+            async.series([mapping.map.addLayer("provinces", {
 
 		        styles: {
 		            fill: '#FFFFFF'
@@ -86,7 +85,7 @@ var mapping = {
                         "long": position.coords.longitude
                     };
                     
-                    $("#location-form").html("");
+                    $("#location-form").html("<p>Retrieving map of other users...</p>");
                     var params = {
                         "lat": location.lat,
                         "lon": location.long,
@@ -94,6 +93,7 @@ var mapping = {
                     };
 
                     $.post("http://192.168.0.113:8000/space/add", params, function(densityData) {
+                        $("#location-form").html("<p>Rendering map...</p>");
                         callback(densityData, location);
                     });
                 }
