@@ -47,16 +47,7 @@ var mapping = {
             });
             startTimeWasting();
             setInterval(wasteTime, 4000);
-            callback(mapping.map);
             
-            $("a").each(function() {
-                var shape = $(this);
-                var title = shape.attr("title");
-                $.each(shape.children(), function(index, child) {
-                    child.setAttribute("fill", pick_colour(densities[title]));
-                });
-            });
-    
         });
     },
 
