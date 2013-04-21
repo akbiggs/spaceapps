@@ -9,7 +9,7 @@ $.get("http://192.168.0.113:8000/space/max", function(data){
 
 
 var pick_colour = function(num){
-    if (num === undefined){
+    if (num === undefined || num.density == 0){
         return '#FFFFFF';
     } else if( num.density < max/4) {
         return '#EDF9FC';

@@ -4,11 +4,15 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from collections import Counter
+from datetime import timedelta, datetime
 
 XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 
 def retcount():
     c = Counter()
+    for prov in Province.objects.all():
+        c[prov] = 1 # ew
+
     for spot in Spotting.objects.all():
         try:
             p = Province.objects.get(geom__contains='POINT({0} {1})'.
@@ -18,19 +22,45 @@ def retcount():
             print('WARN: {0} {1} is nowhere'.format(spot.lon,
                                                 spot.lat))
     cc = Counter()
+    ccc = {}
     for el in c.elements():
-        cc[el.isocode] = c[el] / el.area
-    return cc
+        if c[el] == 1:
+            ccc[el.isocode] = {'density': 0,
+                            'sightings': 0,
+                            'name': el.name
+                            }
+        else:
+            cc[el.isocode] = (c[el] - 1) / el.area
+            ccc[el.isocode] = {'density': (c[el] - 1) / el.area,
+                            'sightings': c[el] - 1,
+                            'name': el.name
+                            }
+    return cc, ccc
 
 
 def countem(req):
-    r = HttpResponse(json.dumps(retcount()), mimetype='application/json')
+    r = HttpResponse(json.dumps(retcount()[1]), mimetype='application/json')
     r['Access-Control-Allow-Origin']  = '*'
     r['Access-Control-Allow-Methods'] = ",".join( XS_SHARING_ALLOWED_METHODS )
     return r
 
 def max(req):
-    r = HttpResponse(retcount().most_common(1)[0][1], mimetype='text/plain')
+    r = HttpResponse(retcount()[0].most_common(1)[0][1], mimetype='text/plain')
+    r['Access-Control-Allow-Origin']  = '*'
+    r['Access-Control-Allow-Methods'] = ",".join( XS_SHARING_ALLOWED_METHODS )
+    return r
+
+
+def lastday(req):
+    spots = Spotting.objects.filter(date__gte=datetime.now() - timedelta(hours=24))
+    r = HttpResponse(spots.count())
+    r['Access-Control-Allow-Origin']  = '*'
+    r['Access-Control-Allow-Methods'] = ",".join( XS_SHARING_ALLOWED_METHODS )
+    return r
+
+
+def mostfriendly(req):
+    r = HttpResponse(Province.objects.get(isocode=retcount()[0].most_common(1)[0][0]).name, mimetype='text/plain')
     r['Access-Control-Allow-Origin']  = '*'
     r['Access-Control-Allow-Methods'] = ",".join( XS_SHARING_ALLOWED_METHODS )
     return r
