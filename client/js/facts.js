@@ -28,5 +28,7 @@ var wasteTime = function() {
 };
 
 var concludeTimeWasting = function() {
-    $("#facts").fadeOut();
+    $("#facts").fadeOut(400, function(){
+        $('#map').show();
+    });
 }

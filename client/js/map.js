@@ -1,5 +1,4 @@
 var max,
-    density,
     panzoom,
     w = $(window).width();
 
@@ -12,11 +11,11 @@ $.get("http://192.168.0.113:8000/space/max", function(data){
 var pick_colour = function(num){
     if (num === undefined){
         return '#FFFFFF';
-    } else if( num < max/4) {
+    } else if( num.density < max/4) {
         return '#EDF9FC';
-    } else if(num < max/2){
+    } else if(num.density < max/2){
         return '#B2E2E2';
-    } else if(num < 3*max/4){
+    } else if(num.density < 3*max/4){
         return '#66C2A4';
     } else {
         return '#238B45';
@@ -115,8 +114,6 @@ var mapping = {
 
                 done: function() {
                     concludeTimeWasting();
-                    $("#map").css("display", "block");
-
                     $("a").each(function() {
                         var shape = $(this);
                         var title = shape.attr("title");
@@ -178,10 +175,6 @@ var mapping = {
                         $("#location-form").html("<p>Rendering map...</p>");
 
                         densityData = JSON.parse(densityData);
-                        $.each( function(density){
-                            densityData[density] = parseFloat(densityData[density]);
-
-                        });
                         callback(densityData, location);
                     });
                 }
