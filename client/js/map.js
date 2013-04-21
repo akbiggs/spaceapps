@@ -1,16 +1,8 @@
-var density = {
-    "US-SD": 2, 
-    "CA-ON": 600, 
-    "US-PA": 5, 
-    "US-MI": 1
-};
-var max = 600;
-
 /*$.getJSON("http://192.168.0.113:8000/space/list", function(data){
     density = JSON.parse(data);
 })*/
 
-var pick_colour = function(num){
+var pick_colour = function(num, max) {
     if (num === undefined || num < max/4) {
         return '#EDF8FB';
     } else if(num < max/2){
@@ -26,7 +18,7 @@ var mapping = {
     map: Kartograph.map("#map", $(window).width() * 0.75, $(window).width() * (0.33)),
     mapURL: "../svg/world.svg",
 
-    loadMap: function(callback) {
+    loadMap: function(densities, callback) {
         mapping.map.loadMap(mapping.mapURL, function() {
             mapping.map.addLayer("provinces", {
 
@@ -48,7 +40,7 @@ var mapping = {
                 var shape = $(this);
                 var title = shape.attr("title");
                 $.each(shape.children(), function(index, child) {
-                    child.setAttribute("fill", pick_colour(density[title]));
+                    child.setAttribute("fill", pick_colour(densities[title]));
                 });
             });
             
@@ -60,9 +52,8 @@ var mapping = {
         });
     },
 
-    showMap: function(pos) {
-
-        mapping.loadMap(function(map) {
+    showMap: function(densityData, pos) {
+        mapping.loadMap(densityData, function(map) {
             $.mobile.changePage("#results");
             $(".ui-page").css("background-image", "none");
         });
@@ -77,23 +68,31 @@ var mapping = {
         if (navigator.geolocation) {
             $("#location-form").html("<p>Finding location...</p>");
 
-            var locationMarker = null;
+            var location = null;
             navigator.geolocation.getCurrentPosition(
                 function(position) {
                     // check if already have the location
                     // fixes bug in FF where invoked more than once due to
                     // cached result
-                    if (locationMarker) {
+                    if (location) {
                         return;
                     }
 
-                    locationMarker = {
+                    location = {
                         "lat": position.coords.latitude,
                         "long": position.coords.longitude
                     };
                     
                     $("#location-form").html("");
-                    callback(locationMarker);
+                    var params = {
+                        "lat": location.lat,
+                        "lon": location.long,
+                        "value": yesVote
+                    };
+
+                    $.post("http://192.168.0.113:8000/space/add", params, function(densityData) {
+                        callback(densityData, location);
+                    });
                 }
             );
             
