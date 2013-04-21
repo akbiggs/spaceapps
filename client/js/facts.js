@@ -29,6 +29,14 @@ var wasteTime = function() {
 
 var concludeTimeWasting = function() {
     $("#facts").fadeOut(400, function(){
-        $('#map').show();
+
+        $.get("http://192.168.0.113:8000/space/mostfriendly", function(data) {
+            $("#done").append("<p>And the most ISS-friendly region in the world is...<b>" + data + "!</b></p>");
+            setTimeout(function() {
+                $("#done").fadeOut(400, function() {
+                    $('#map').show();
+                });
+            }, 4000);
+        });
     });
 }
