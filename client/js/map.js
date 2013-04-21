@@ -11,14 +11,14 @@ var max = 600;
 })*/
 
 var pick_colour = function(num){
-    if(num < max/4){
-        return '#0xEDF8FB';
+    if (num === undefined || num < max/4) {
+        return '#EDF8FB';
     } else if(num < max/2){
-        return '#0xB2E2E2';
+        return '#B2E2E2';
     } else if(num < 3*max/4){
-        return '#0x66C2A4';
+        return '#66C2A4';
     } else {
-        return '#0x238B45';
+        return '#238B45';
     }
 }
 
@@ -43,10 +43,20 @@ var mapping = {
                 },
             });
             callback(mapping.map);
-
-            $.each(Object.keys(density), function(index, value){
-                $('a[key="' + value + '"]').children()[0].attr('fill', pick_colour(density.value));
+            
+            $("a").each(function() {
+                var shape = $(this);
+                var title = shape.attr("title");
+                $.each(shape.children(), function(index, child) {
+                    child.setAttribute("fill", pick_colour(density[title]));
+                });
             });
+            
+            /*
+            $.each(Object.keys(density), function(index, value) {
+                
+                $('a[key="' + value + '"]').children()[0].attr('fill', pick_colour(density.value));
+            });*/
         });
     },
 
