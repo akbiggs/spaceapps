@@ -23,16 +23,26 @@ var pick_colour = function(num){
     }
 };
 
+var get_pos = function(pos, axis){
+    if(axis == "x"){
+        var coord = $('#results.ui-page').width() * (180.0 + pos.long)/360;
+        return (coord - $(window).width()/2);
+    } else if(axis == "y"){
+        var coord = $('#results.ui-page').height() * (90 - pos.lat)/360
+        return (coord - $(window).height()/2);
+    }
+}
+
 var initPanZoom = function(pos){
     console.log(pos)
     var panZoom = mapping.map.paper.panzoom({ 
-        initialZoom : 4,
+        initialZoom : 5,
         initialPosition : {
-            x : $('#results.ui-page').width() * (180.0 + pos.long)/360,
-            y : $('#results.ui-page').height() * (90 - pos.lat)/360, 
+            x : get_pos(pos, "x"),
+            y : get_pos(pos, "y"), 
         }
     });
-    console.log(panZoom.currPos);
+    console.log(panZoom);
     panZoom.enable()
 
     setInterval(function() {
@@ -106,19 +116,20 @@ var mapping = {
                 done: function() {
                     concludeTimeWasting();
                     $("#map").css("display", "block");
+
+                    $("a").each(function() {
+                        var shape = $(this);
+                        var title = shape.attr("title");
+                        $.each(shape.children(), function(index, child) {
+                            child.setAttribute("fill", pick_colour(densities[title]));
+                        });
+                    });
                 }
             });
             startTimeWasting();
             setInterval(wasteTime, 4000);
             callback(mapping.map);
             
-            $("a").each(function() {
-                var shape = $(this);
-                var title = shape.attr("title");
-                $.each(shape.children(), function(index, child) {
-                    child.setAttribute("fill", pick_colour(densities[title]));
-                });
-            });
             initPanZoom(pos);
         });
     },
