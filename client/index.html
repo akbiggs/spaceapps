@@ -26,7 +26,7 @@
         href="https://raw.github.com/kartograph/kartograph.org/master/showcase/panzoom/panzoom.css">
         </link>
 
-                <title>Saw The Satellite</title>
+        <title>Saw The Satellite</title>
     </head>
     <body>
         <!-- MAIN CONTENT -->
@@ -45,7 +45,9 @@
 
         <!-- RESULTS PAGE -->
         <div data-role="page" id="results">
-            <div id="map">
+            <div id="facts">
+            </div>
+            <div id="map" style="display: none;">
             </div>
         </div>
     </body>
@@ -60,6 +62,7 @@
         src="http://kartograph.org/js/kartograph.js"></script>
 
     <!-- CUSTOM IMPORTS -->
+    <script src="js/facts.js"></script>
     <script src="js/map.js"></script>
     <script src="js/handlers.js"></script>
 </html>

@@ -2,8 +2,7 @@ var max, density;
 
 $.get("http://192.168.0.113:8000/space/max", function(data){
     max = parseInt(data);
-    }, "text");
-
+}, "text");
 
 var pick_colour = function(num){
     if (num === undefined){
@@ -25,13 +24,13 @@ var mapping = {
 
     loadMap: function(densities, callback) {
         mapping.map.loadMap(mapping.mapURL, function() {
-            async.series([mapping.map.addLayer("provinces", {
-
-		        styles: {
+            mapping.map.addLayer("provinces", {
+		        
+                styles: {
 		            fill: '#FFFFFF'
 		        },
 
-                chunks: 25,
+                chunks: 75,
 
 		        title: function(d) {
 		            return d.id;
@@ -40,7 +39,14 @@ var mapping = {
                 key: function(d) {
                     return d.id;
                 },
+
+                done: function() {
+                    concludeTimeWasting();
+                    $("#map").css("display", "block");
+                }
             });
+            startTimeWasting();
+            setInterval(wasteTime, 4000);
             callback(mapping.map);
             
             $("a").each(function() {
@@ -67,12 +73,14 @@ var mapping = {
     },
 
     getLocation: function(callback, yesVote) {
+        navigator.geolocation = undefined;
         if (navigator.geolocation) {
             $("#location-form").html("<p>Finding location...</p>");
 
             var location = null;
             navigator.geolocation.getCurrentPosition(
                 function(position) {
+                    
                     // check if already have the location
                     // fixes bug in FF where invoked more than once due to
                     // cached result
@@ -94,7 +102,7 @@ var mapping = {
 
                     $.post("http://192.168.0.113:8000/space/add", params, function(densityData) {
                         $("#location-form").html("<p>Rendering map...</p>");
-                        callback(densityData, location);
+                        callback(JSON.parse(densityData), location);
                     });
                 }
             );
