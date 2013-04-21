@@ -16,7 +16,7 @@ var startTimeWasting = function() {
     $("#facts").append("<p class='fact' style='display: none;'>While you wait, here are some fun facts about the ISS.</p>");
     $('.fact').fadeIn();
     $.get("http://192.168.0.113:8000/space/lastday", function(data) {
-        $("#facts").append("<p class='fact' style='display: none;'>In the past 24 hours, " + toString(data) + " have seen the satellite.</p>");
+        $("#facts").append("<p class='fact' style='display: none;'>In the past 24 hours, " + data.toString() + " have seen the satellite.</p>");
         $(".fact").fadeIn();
     });
 };
