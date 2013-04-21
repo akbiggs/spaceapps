@@ -47,7 +47,7 @@ var mapping = {
             });
             startTimeWasting();
             setInterval(wasteTime, 4000);
-            
+            callback(mapping.map);
         });
     },
 
